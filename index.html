@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ANDAR | Calzado urbano</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect x='6' y='26' width='26' height='8' rx='4' transform='rotate(-28 6 26)' fill='%233F5BFF'/%3E%3Crect x='18' y='10' width='20' height='8' rx='4' transform='rotate(-28 18 10)' fill='%2311201F'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Loader inicial: se oculta con el evento "load" (INDICADOR 8) -->
+  <div id="loader" class="loader">
+    <span class="loader__marca">
+      <svg viewBox="0 0 48 48" width="34" height="34" aria-hidden="true">
+        <rect x="6" y="26" width="26" height="8" rx="4" transform="rotate(-28 6 26)" fill="currentColor"/>
+        <rect x="18" y="10" width="20" height="8" rx="4" transform="rotate(-28 18 10)" fill="currentColor" opacity="0.5"/>
+      </svg>
+      ANDAR
+    </span>
+  </div>
+
+  <!-- ================= HEADER ================= -->
+  <header id="header" class="header">
+    <div class="header__inner">
+      <a href="#inicio" class="marca">
+        <svg class="marca__icono" viewBox="0 0 48 48" width="26" height="26" aria-hidden="true">
+          <rect x="6" y="26" width="26" height="8" rx="4" transform="rotate(-28 6 26)" fill="currentColor"/>
+          <rect x="18" y="10" width="20" height="8" rx="4" transform="rotate(-28 18 10)" fill="currentColor" opacity="0.5"/>
+        </svg>
+        <span class="marca__texto">ANDAR</span>
+      </a>
+
+      <nav class="nav" aria-label="Categorías">
+        <button class="nav__link" data-categoria="todos">Todos</button>
+        <button class="nav__link" data-categoria="deportivo">Deportivos</button>
+        <button class="nav__link" data-categoria="casual">Casuales</button>
+        <button class="nav__link" data-categoria="bota">Botas</button>
+      </nav>
+
+      <div class="header__acciones">
+        <div class="buscador-caja">
+          <input
+            id="buscador"
+            class="buscador"
+            type="text"
+            placeholder="Buscar calzado..."
+            autocomplete="off"
+          >
+          <button id="btn-buscar" class="buscador-btn" type="button" aria-label="Buscar">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="7"></circle>
+              <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
+            </svg>
+          </button>
+        </div>
+        <button id="btn-carrito" class="btn-carrito" aria-label="Abrir carrito">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 7h12l-1 12H7L6 7Z"></path>
+            <path d="M9 7a3 3 0 0 1 6 0"></path>
+          </svg>
+          <span id="contador-carrito" class="contador-carrito">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <section id="inicio" class="hero">
+    <div class="hero__contenido">
+      <p class="hero__ticker"><span class="hero__punto"></span><span id="hero-mensaje">Colección nueva cada temporada</span></p>
+      <h1 class="hero__titulo">Camina como si la ciudad fuera tuya.</h1>
+      <p class="hero__subtitulo">Zapatillas, botines y urbanos pensados para moverte rápido y verte mejor en cada paso.</p>
+      <a href="#catalogo" class="btn btn--primario">Explorar catálogo</a>
+    </div>
+    <div class="hero__visual">
+      <div class="hero__vitrina">
+        <img src="imaganes/foto1.gif" alt="Calzado ANDAR">
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CATÁLOGO ================= -->
+  <section id="catalogo" class="catalogo">
+    <div class="catalogo__cabecera">
+      <h2>Catálogo</h2>
+      <p id="resultado-info" class="resultado-info"></p>
+    </div>
+
+    <!-- Grid de productos: se llena dinámicamente desde script.js -->
+    <div id="grid-productos" class="grid-productos"></div>
+  </section>
+
+  <!-- ================= MODAL DE DETALLE ================= -->
+  <div id="modal" class="modal" hidden>
+    <div class="modal__contenido">
+      <button id="cerrar-modal" class="modal__cerrar" aria-label="Cerrar">✕</button>
+      <div id="modal-cuerpo"></div>
+    </div>
+  </div>
+
+  <!-- ================= CARRITO (panel lateral) ================= -->
+  <aside id="panel-carrito" class="panel-carrito">
+    <div class="panel-carrito__cabecera">
+      <h2>Tu carrito</h2>
+      <button id="cerrar-carrito" class="modal__cerrar" aria-label="Cerrar carrito">✕</button>
+    </div>
+    <div id="items-carrito" class="items-carrito"></div>
+    <div class="panel-carrito__resumen">
+      <div class="linea"><span>Subtotal</span><span id="res-subtotal">S/ 0.00</span></div>
+      <div class="linea"><span id="res-descuento-label">Descuento</span><span id="res-descuento">S/ 0.00</span></div>
+      <div class="linea"><span>Envío</span><span id="res-envio">S/ 0.00</span></div>
+      <div class="linea linea--total"><span>Total</span><span id="res-total">S/ 0.00</span></div>
+    </div>
+    <button id="btn-vaciar" class="btn btn--secundario">Vaciar carrito</button>
+  </aside>
+  <div id="overlay" class="overlay" hidden></div>
+
+  <!-- Botón volver arriba: aparece/desaparece con el evento scroll (INDICADOR 8) -->
+  <button id="btn-arriba" class="btn-arriba" hidden aria-label="Volver arriba">↑</button>
+
+  <!-- Zona de notificaciones tipo "toast" -->
+  <div id="toast-contenedor" class="toast-contenedor" aria-live="polite"></div>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer">
+    <div class="footer__marca">
+      <svg viewBox="0 0 48 48" width="20" height="20" aria-hidden="true">
+        <rect x="6" y="26" width="26" height="8" rx="4" transform="rotate(-28 6 26)" fill="currentColor"/>
+        <rect x="18" y="10" width="20" height="8" rx="4" transform="rotate(-28 18 10)" fill="currentColor" opacity="0.5"/>
+      </svg>
+      <span>ANDAR</span>
+    </div>
+    <p>© 2026 ANDAR.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
