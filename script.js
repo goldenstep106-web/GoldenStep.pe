@@ -1,26 +1,3 @@
-/* =========================================================================
-   ANDAR — script.js
-   -------------------------------------------------------------------------
-   GUÍA RÁPIDA PARA LA SUSTENTACIÓN (dónde está cada indicador de la
-   lista de cotejo del Consolidado 2 — Diseño Web):
-
-     1. Valores, tipos y operadores ........ sección "VALORES Y OPERADORES"
-     2. Estructuras de control ............. sección "ESTRUCTURAS DE CONTROL"
-     3. Definición y uso de funciones ....... sección "FUNCIONES"
-     4. Uso de objetos y arrays ............. sección "DATOS: PRODUCTOS"
-     5. Encapsulamiento y métodos ........... clase Carrito (campo #items)
-     6. Prototipos y clases ................. clases Zapato / subclases
-     7. Mapas y polimorfismo ................ Map del carrito + obtenerEtiqueta()
-     8. Manejo de eventos y DOM ............. sección "EVENTOS DEL DOM"
-     9. Propagación de eventos .............. sección "PROPAGACIÓN DE EVENTOS"
-    10. Interactividad y funcionalidad ...... todo el flujo del carrito
-    11. Trabajo en equipo y proactividad .... completar en el informe .doc
-    12. Diseño y maquetado coherente ........ index.html + styles.css
-
-   Versión autónoma: los productos están escritos aquí mismo, sin depender
-   de internet ni de ninguna base de datos externa.
-   ========================================================================= */
-
 'use strict';
 
 /* =========================================================================
