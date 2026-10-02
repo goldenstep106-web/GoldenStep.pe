@@ -2,11 +2,11 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ANDAR | Calzado urbano</title>
+<meta name="viewport" content="width=1200">
+<title>GoldenStep</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect x='6' y='26' width='26' height='8' rx='4' transform='rotate(-28 6 26)' fill='%233F5BFF'/%3E%3Crect x='18' y='10' width='20' height='8' rx='4' transform='rotate(-28 18 10)' fill='%2311201F'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Manrope:wght@400;500;600;700&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -18,7 +18,7 @@
         <rect x="6" y="26" width="26" height="8" rx="4" transform="rotate(-28 6 26)" fill="currentColor"/>
         <rect x="18" y="10" width="20" height="8" rx="4" transform="rotate(-28 18 10)" fill="currentColor" opacity="0.5"/>
       </svg>
-      ANDAR
+     GoldenStep
     </span>
   </div>
 
@@ -26,16 +26,13 @@
   <header id="header" class="header">
     <div class="header__inner">
       <a href="#inicio" class="marca">
-        <svg class="marca__icono" viewBox="0 0 48 48" width="26" height="26" aria-hidden="true">
-          <rect x="6" y="26" width="26" height="8" rx="4" transform="rotate(-28 6 26)" fill="currentColor"/>
-          <rect x="18" y="10" width="20" height="8" rx="4" transform="rotate(-28 18 10)" fill="currentColor" opacity="0.5"/>
-        </svg>
-        <span class="marca__texto">ANDAR</span>
+        <img class="marca__icono" src="imaganes/logo.png" alt="Logo GoldenStep">
+        <span class="marca__texto">GoldenStep</span>
       </a>
 
       <nav class="nav" aria-label="Categorías">
         <button class="nav__link" data-categoria="todos">Todos</button>
-        <button class="nav__link" data-categoria="deportivo">Deportivos</button>
+        <button class="nav__link" data-categoria="deportivo">Zapatillas</button>
         <button class="nav__link" data-categoria="casual">Casuales</button>
         <button class="nav__link" data-categoria="bota">Botas</button>
       </nav>
@@ -77,7 +74,7 @@
     </div>
     <div class="hero__visual">
       <div class="hero__vitrina">
-        <img src="imaganes/foto1.gif" alt="Calzado ANDAR">
+        <img src="imaganes/foto1.gif" alt="Calzado GoldenStep">
       </div>
     </div>
   </section>
@@ -101,6 +98,45 @@
     </div>
   </div>
 
+  <!-- ================= MODAL DE PEDIDO ================= -->
+  <div id="modal-pedido" class="modal" hidden>
+    <div class="modal__contenido modal__contenido--pedido">
+      <button id="cerrar-pedido" class="modal__cerrar" aria-label="Cerrar">✕</button>
+
+      <!-- Formulario -->
+      <div id="pedido-formulario">
+        <h2 class="pedido__titulo">Finalizar pedido</h2>
+        <div id="pedido-resumen" class="pedido__resumen"></div>
+
+        <form id="form-pedido" class="pedido__form">
+          <label class="pedido__campo">Nombre completo
+            <input name="nombre" type="text" required minlength="2" maxlength="100" autocomplete="name" placeholder="Ej: Juan Pérez">
+          </label>
+          <label class="pedido__campo">Teléfono o WhatsApp
+            <input name="telefono" type="tel" required minlength="6" maxlength="20" autocomplete="tel" placeholder="Ej: 987654321">
+          </label>
+          <label class="pedido__campo">Dirección de entrega
+            <input name="direccion" type="text" required minlength="5" maxlength="250" autocomplete="street-address" placeholder="Distrito, calle y número">
+          </label>
+          <label class="pedido__campo">Nota (opcional)
+            <textarea name="nota" maxlength="500" rows="2" placeholder="Referencia, hora de entrega, etc."></textarea>
+          </label>
+          <button id="btn-enviar-pedido" type="submit" class="pedido__enviar">Confirmar pedido</button>
+        </form>
+      </div>
+
+      <!-- Confirmación -->
+      <div id="pedido-exito" class="pedido__exito" hidden>
+        <h2 class="pedido__titulo">¡Pedido recibido!</h2>
+        <p>Tu número de pedido es</p>
+        <p id="pedido-codigo" class="pedido__codigo"></p>
+        <p class="pedido__texto">Guárdalo por si necesitas consultarlo. Te contactaremos para confirmar tu pedido y la entrega.</p>
+        <a id="pedido-whatsapp" class="pedido__enviar pedido__enviar--enlace" href="#" target="_blank" rel="noopener">Confirmar por WhatsApp</a>
+        <button id="pedido-seguir" class="pedido__secundario" type="button">Seguir comprando</button>
+      </div>
+    </div>
+  </div>
+
   <!-- ================= CARRITO (panel lateral) ================= -->
   <aside id="panel-carrito" class="panel-carrito">
     <div class="panel-carrito__cabecera">
@@ -110,10 +146,10 @@
     <div id="items-carrito" class="items-carrito"></div>
     <div class="panel-carrito__resumen">
       <div class="linea"><span>Subtotal</span><span id="res-subtotal">S/ 0.00</span></div>
-      <div class="linea"><span id="res-descuento-label">Descuento</span><span id="res-descuento">S/ 0.00</span></div>
-      <div class="linea"><span>Envío</span><span id="res-envio">S/ 0.00</span></div>
+      <div class="linea"><span>Envío</span><span id="res-envio">Gratis</span></div>
       <div class="linea linea--total"><span>Total</span><span id="res-total">S/ 0.00</span></div>
     </div>
+    <button id="btn-finalizar" class="btn btn--bloque">Finalizar pedido</button>
     <button id="btn-vaciar" class="btn btn--secundario">Vaciar carrito</button>
   </aside>
   <div id="overlay" class="overlay" hidden></div>
@@ -131,11 +167,12 @@
         <rect x="6" y="26" width="26" height="8" rx="4" transform="rotate(-28 6 26)" fill="currentColor"/>
         <rect x="18" y="10" width="20" height="8" rx="4" transform="rotate(-28 18 10)" fill="currentColor" opacity="0.5"/>
       </svg>
-      <span>ANDAR</span>
+      <span>GoldenStep</span>
     </div>
-    <p>© 2026 ANDAR.</p>
+    <p>© 2026 GoldenStep.</p>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.2/dist/umd/supabase.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
