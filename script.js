@@ -78,13 +78,20 @@ class Zapato {
     return this.stock > 0;
   }
 
+  // Enlace (URL completa) de la foto del zapato, para que se pueda ver en WhatsApp.
+  // Solo existe cuando la página está publicada (http/https), no al abrir el archivo suelto.
+  urlFoto() {
+    if (this.imagen && window.location.protocol.startsWith('http')) {
+      return new URL(this.imagen, window.location.href).href;
+    }
+    return '';
+  }
+
   // Enlace de WhatsApp con el mensaje de consulta de precio.
   enlaceConsulta() {
-    let mensaje = `Hola ${NOMBRE_TIENDA}, quiero consultar el precio de este calzado: ${this.nombre}.`;
-    if (this.imagen && window.location.protocol.startsWith('http')) {
-      const urlFoto = new URL(this.imagen, window.location.href).href;
-      mensaje += `\nFoto: ${urlFoto}`;
-    }
+    let mensaje = `Hola, quiero consultar el precio de este calzado: ${this.nombre}. ¿Me podría brindar más información, por favor?`;
+    const foto = this.urlFoto();
+    if (foto) mensaje += `\n${foto}`;
     return `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(mensaje)}`;
   }
 
@@ -262,7 +269,8 @@ function obtenerProductosFiltrados() {
   const busqueda = normalizar(ultimaBusqueda.trim());
 
   return catalogo.filter(z => {
-    const coincideCategoria = categoriaActiva === 'todos' || z.categoria === categoriaActiva;
+    const coincideCategoria = categoriaActiva === 'todos'
+      || (categoriaActiva === 'ultimas' ? z.stock <= 4 : z.categoria === categoriaActiva);
     const terminos = [z.nombre, z.categoria, ...z.etiquetas].map(normalizar);
     const coincideBusqueda = terminos.some(t => t.includes(busqueda) || busqueda.includes(t));
     return coincideCategoria && coincideBusqueda; // 1) operador lógico &&
@@ -352,19 +360,6 @@ function mostrarToast(mensaje, tipo = 'info') {
 }
 
 /* =========================================================================
-   ESCALA: la página siempre se ve como en computadora (1200px de ancho).
-   Si la ventana es más angosta, todo el contenido se reduce para que se
-   vea completo y ordenado. En celulares lo hace el <meta viewport>.
-   ========================================================================= */
-const ANCHO_DISENO = 1200;
-function ajustarEscala() {
-  const escala = Math.min(1, window.innerWidth / ANCHO_DISENO);
-  document.body.style.zoom = escala;
-}
-window.addEventListener('resize', ajustarEscala);
-ajustarEscala();
-
-/* =========================================================================
    8) EVENTOS DEL DOM
    ========================================================================= */
 
@@ -417,15 +412,34 @@ document.getElementById('btn-buscar').addEventListener('click', () => {
 buscador.addEventListener('focus', () => buscador.classList.add('buscador--enfocado'));
 buscador.addEventListener('blur',  () => buscador.classList.remove('buscador--enfocado'));
 
-// --- Filtro por categoría (delegación + switch visual con clases) ---
-document.querySelectorAll('.nav__link').forEach(boton => {
-  boton.addEventListener('click', () => {
-    categoriaActiva = boton.dataset.categoria;
-    document.querySelectorAll('.nav__link').forEach(b => b.classList.remove('nav__link--activo'));
-    boton.classList.add('nav__link--activo');
-    renderCatalogo();
-  });
+// --- Menú móvil (hamburguesa) y buscador desplegable ---
+const nav = document.getElementById('nav');
+const btnMenu = document.getElementById('btn-menu');
+function cerrarMenu() {
+  nav.classList.remove('nav--abierto');
+  btnMenu.setAttribute('aria-expanded', 'false');
+}
+btnMenu.addEventListener('click', () => {
+  const abierto = nav.classList.toggle('nav--abierto');
+  btnMenu.setAttribute('aria-expanded', String(abierto));
 });
+const buscadorPanel = document.getElementById('buscador-panel');
+document.getElementById('btn-lupa').addEventListener('click', () => {
+  buscadorPanel.hidden = !buscadorPanel.hidden;
+  if (!buscadorPanel.hidden) buscador.focus();
+});
+
+// --- Filtro por categoría: menú y tarjetas de categoría ---
+function filtrarCategoria(categoria) {
+  categoriaActiva = categoria;
+  document.querySelectorAll('.nav__link[data-categoria]').forEach(b =>
+    b.classList.toggle('nav__link--activo', b.dataset.categoria === categoria));
+  renderCatalogo();
+}
+document.querySelectorAll('[data-categoria]').forEach(el => {
+  el.addEventListener('click', () => { filtrarCategoria(el.dataset.categoria); cerrarMenu(); });
+});
+document.querySelectorAll('.nav__link:not([data-categoria])').forEach(el => el.addEventListener('click', cerrarMenu));
 
 /* =========================================================================
    9) PROPAGACIÓN DE EVENTOS (burbujeo y captura)
@@ -524,13 +538,8 @@ overlay.addEventListener('click', () => alternarCarrito(false));
 
 /* --- Modal de detalle (ficha de producto) --- */
 const modal = document.getElementById('modal');
-// Tallas de Perú (EU) con su equivalencia en US
-const TALLAS = [
-  { eu: '36', us: '4' },   { eu: '37', us: '5' },   { eu: '38', us: '5.5' },
-  { eu: '39', us: '6.5' }, { eu: '40', us: '7' },   { eu: '41', us: '8' },
-  { eu: '42', us: '8.5' }, { eu: '43', us: '9.5' }, { eu: '44', us: '10' },
-  { eu: '45', us: '11' },
-];
+// Tallas de Perú
+const TALLAS = ['36', '37', '38', '39', '40', '41', '42', '43', '44', '45'];
 const TALLAS_AGOTADAS = []; // ejemplo: ['36', '37'] -> salen tachadas y no se pueden elegir
 const ICONO_BOLSA = `<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/><path d="M12 12v5M9.500 14.500h5"/></svg>`;
 let tallaSeleccionada = null;
@@ -569,14 +578,14 @@ function abrirModal(id) {
           <span class="detalle__guia">Guía de tallas</span>
         </div>
         <div class="detalle__tallas">
-          ${TALLAS.map(t => `<button class="detalle__talla" data-talla="${t.eu}" ${TALLAS_AGOTADAS.includes(t.eu) ? 'disabled' : ''}><span class="detalle__talla-eu">${t.eu}</span><span class="detalle__talla-us">US ${t.us}</span></button>`).join('')}
+          ${TALLAS.map(t => `<button class="detalle__talla" data-talla="${t}" ${TALLAS_AGOTADAS.includes(t) ? 'disabled' : ''}>${t}</button>`).join('')}
         </div>
 
         <p class="detalle__aviso"><strong>Talla real.</strong> Te recomendamos pedir tu talla habitual.</p>
 
         <div class="detalle__acciones">
           <button class="detalle__agregar" data-accion="agregar" data-id="${z.id}" ${z.hayStock() ? '' : 'disabled'}>
-            <span>${z.hayStock() ? 'Añadir al carrito' : 'Producto agotado'}</span>
+            <span>${z.hayStock() ? 'Pedir ahora' : 'Producto agotado'}</span>
             ${ICONO_BOLSA}
           </button>
           <button class="detalle__fav ${esFav ? 'detalle__fav--activo' : ''}" data-accion="favorito-modal" aria-label="Agregar a favoritos">
@@ -624,10 +633,10 @@ document.getElementById('modal-cuerpo').addEventListener('click', (evento) => {
   }
   if (carrito.agregar(zapatoModal, 1, tallaSeleccionada)) {
     contadorClicsAgregar(); // función "creciente": suma un clic más
-    mostrarToast(`${zapatoModal.nombre} (talla ${tallaSeleccionada}) agregado al carrito`);
     renderCarrito();
     renderCatalogo();
     modal.hidden = true;
+    abrirPedido();          // abre directo el formulario para completar el pedido
   }
 });
 
@@ -685,14 +694,21 @@ function abrirPedido() {
 
 function mostrarPedidoExitoso(id, filas, datos, total) {
   const codigo = id.slice(0, 8).toUpperCase();
-  const lineas = filas.map(f => `- ${f.cantidad} x ${f.zapato.nombre} (talla ${f.talla}) - ${formatearMoneda(f.zapato.precio * f.cantidad)}`).join('\n');
+  const lineas = filas.map(f => {
+    const foto = f.zapato.urlFoto();
+    return `- ${f.cantidad} x ${f.zapato.nombre} (talla ${f.talla}) - ${formatearMoneda(f.zapato.precio * f.cantidad)}` + (foto ? `\n  ${foto}` : '');
+  }).join('\n');
   const mensaje =
-`Hola ${NOMBRE_TIENDA}, hice el pedido N° ${codigo}.
+`Hola, quiero consultar el precio y que me brinden más información, por favor.
+Pedido N° ${codigo}
+
 Nombre: ${datos.nombre}
 Teléfono: ${datos.telefono}
 Dirección: ${datos.direccion}
+
 Productos:
 ${lineas}
+
 Total: ${formatearMoneda(total)}`;
 
   document.getElementById('pedido-codigo').textContent = codigo;
@@ -704,6 +720,7 @@ Total: ${formatearMoneda(total)}`;
 document.getElementById('btn-finalizar').addEventListener('click', abrirPedido);
 document.getElementById('cerrar-pedido').addEventListener('click', () => (modalPedido.hidden = true));
 document.getElementById('pedido-seguir').addEventListener('click', () => (modalPedido.hidden = true));
+document.getElementById('pedido-volver').addEventListener('click', () => (modalPedido.hidden = true));
 modalPedido.addEventListener('click', (evento) => {
   if (evento.target === modalPedido) modalPedido.hidden = true;
 });
@@ -771,6 +788,38 @@ formPedido.addEventListener('submit', async (evento) => {
 });
 
 /* =========================================================================
+   PIE DE PÁGINA: WhatsApp, redes y boletín
+   ========================================================================= */
+// Pega aquí los enlaces de tus redes. Si dejas uno vacío, ese botón no aparece.
+const REDES = { Instagram: '', Facebook: '', TikTok: '' };
+
+document.getElementById('enlace-whatsapp').innerHTML = ICONO_WHATSAPP;
+document.querySelectorAll('.enlace-wa').forEach(a => {
+  a.href = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(a.dataset.mensaje)}`;
+});
+document.getElementById('redes').innerHTML =
+  `<a href="https://wa.me/${WHATSAPP_NUMERO}" target="_blank" rel="noopener">WhatsApp</a>` +
+  Object.entries(REDES).filter(([, url]) => url)
+    .map(([nombre, url]) => `<a href="${url}" target="_blank" rel="noopener">${nombre}</a>`).join('');
+
+document.getElementById('form-newsletter').addEventListener('submit', async (evento) => {
+  evento.preventDefault();
+  const formulario = evento.target;
+  const correo = formulario.elements.correo.value.trim();
+  if (!db) { mostrarToast('No se pudo conectar. Inténtalo más tarde.', 'error'); return; }
+  const { error } = await db.from('suscriptores').insert({ correo });
+  if (!error) {
+    mostrarToast('¡Gracias por suscribirte!');
+    formulario.reset();
+  } else if (error.code === '23505') {
+    mostrarToast('Ese correo ya está suscrito');
+  } else {
+    console.error('Error al suscribir:', error);
+    mostrarToast('No se pudo suscribir. Inténtalo de nuevo.', 'error');
+  }
+});
+
+/* =========================================================================
    TEMPORIZADOR: mensajes rotativos del hero (setInterval)
    ========================================================================= */
 const mensajesHero = ['Colección nueva cada temporada', 'Envío gratis en todos tus pedidos', 'Hecho para moverte rápido'];
@@ -783,13 +832,11 @@ setInterval(() => {
 /* =========================================================================
    TEMPORIZADOR: carrusel de GIFs del hero (setInterval + setTimeout)
    ========================================================================= */
-const imgHero = document.querySelector('.hero__vitrina img');
+const imgHero = document.querySelector('.hero__fondo img');
 if (imgHero) {
   const GIFS_HERO = [
-    'imaganes/foto1.gif',
-    'imaganes/foto2.gif',
-    'imaganes/gif.gif',
-    'imaganes/pp1.gif',
+    'imaganes/portada.jpg',
+    // Agrega aquí más fotos o GIFs y la portada rotará sola entre ellos
   ];
   let indiceGif = 0;
   imgHero.src = GIFS_HERO[0];                                // arranca con el primero

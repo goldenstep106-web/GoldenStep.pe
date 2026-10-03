@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=1200">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GoldenStep</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect x='6' y='26' width='26' height='8' rx='4' transform='rotate(-28 6 26)' fill='%233F5BFF'/%3E%3Crect x='18' y='10' width='20' height='8' rx='4' transform='rotate(-28 18 10)' fill='%2311201F'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,40 +25,36 @@
   <!-- ================= HEADER ================= -->
   <header id="header" class="header">
     <div class="header__inner">
+      <button id="btn-menu" class="icono-btn menu-btn" aria-label="Abrir menú" aria-expanded="false">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+      </button>
       <a href="#inicio" class="marca">
         <img class="marca__icono" src="imaganes/logo.png" alt="Logo GoldenStep">
         <span class="marca__texto">GoldenStep</span>
       </a>
-
-      <nav class="nav" aria-label="Categorías">
-        <button class="nav__link" data-categoria="todos">Todos</button>
-        <button class="nav__link" data-categoria="deportivo">Zapatillas</button>
-        <button class="nav__link" data-categoria="casual">Casuales</button>
-        <button class="nav__link" data-categoria="bota">Botas</button>
+      <nav id="nav" class="nav" aria-label="Principal">
+        <a class="nav__link" href="#inicio">Inicio</a>
+        <a class="nav__link" href="#catalogo" data-categoria="todos">Catálogo</a>
+        <a class="nav__link" href="#catalogo" data-categoria="deportivo">Zapatillas</a>
+        <a class="nav__link" href="#catalogo" data-categoria="casual">Casuales</a>
+        <a class="nav__link" href="#contacto">Contacto</a>
       </nav>
-
       <div class="header__acciones">
-        <div class="buscador-caja">
-          <input
-            id="buscador"
-            class="buscador"
-            type="text"
-            placeholder="Buscar calzado..."
-            autocomplete="off"
-          >
-          <button id="btn-buscar" class="buscador-btn" type="button" aria-label="Buscar">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="11" cy="11" r="7"></circle>
-              <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
-            </svg>
-          </button>
-        </div>
+        <button id="btn-lupa" class="icono-btn" aria-label="Buscar">
+          <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line></svg>
+        </button>
+        <a id="enlace-whatsapp" class="icono-btn enlace-wa" data-mensaje="Hola, quiero hacer una consulta, por favor." href="#" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp"></a>
         <button id="btn-carrito" class="btn-carrito" aria-label="Abrir carrito">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M6 7h12l-1 12H7L6 7Z"></path>
-            <path d="M9 7a3 3 0 0 1 6 0"></path>
-          </svg>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7h12l-1 12H7L6 7Z"></path><path d="M9 7a3 3 0 0 1 6 0"></path></svg>
           <span id="contador-carrito" class="contador-carrito">0</span>
+        </button>
+      </div>
+    </div>
+    <div id="buscador-panel" class="buscador-panel" hidden>
+      <div class="buscador-caja">
+        <input id="buscador" class="buscador" type="text" placeholder="Buscar calzado..." autocomplete="off">
+        <button id="btn-buscar" class="buscador-btn" type="button" aria-label="Buscar">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line></svg>
         </button>
       </div>
     </div>
@@ -66,15 +62,23 @@
 
   <!-- ================= HERO ================= -->
   <section id="inicio" class="hero">
+    <div class="hero__fondo"><img src="imaganes/portada.jpg" alt="Zapatillas GoldenStep"></div>
     <div class="hero__contenido">
       <p class="hero__ticker"><span class="hero__punto"></span><span id="hero-mensaje">Colección nueva cada temporada</span></p>
-      <h1 class="hero__titulo">Camina como si la ciudad fuera tuya.</h1>
-      <p class="hero__subtitulo">Zapatillas, botines y urbanos pensados para moverte rápido y verte mejor en cada paso.</p>
-      <a href="#catalogo" class="btn btn--primario">Explorar catálogo</a>
+      <h1 class="hero__titulo">Camina con estilo,<br>pisa con fuerza.</h1>
+      <p class="hero__subtitulo">Zapatillas deportivas y casuales para moverte rápido y verte mejor en cada paso. Pide fácil por WhatsApp, con envío gratis.</p>
+      <a href="#catalogo" class="btn btn--primario">Explorar colección</a>
     </div>
-    <div class="hero__visual">
-      <div class="hero__vitrina">
-        <img src="imaganes/foto1.gif" alt="Calzado GoldenStep">
+  </section>
+
+  <!-- ================= CATEGORÍAS ================= -->
+  <section class="categorias" id="categorias">
+    <div class="contenedor">
+      <h2 class="seccion__titulo">Compra por categoría</h2>
+      <div class="categorias__grid">
+        <a href="#catalogo" class="categoria" data-categoria="deportivo"><img src="imaganes/3.jpeg" alt="" loading="lazy"><span class="categoria__texto">Zapatillas deportivas</span></a>
+        <a href="#catalogo" class="categoria" data-categoria="casual"><img src="imaganes/4.jpeg" alt="" loading="lazy"><span class="categoria__texto">Calzado casual</span></a>
+        <a href="#catalogo" class="categoria" data-categoria="ultimas"><img src="imaganes/5.jpeg" alt="" loading="lazy"><span class="categoria__texto">Últimas unidades</span></a>
       </div>
     </div>
   </section>
@@ -88,6 +92,24 @@
 
     <!-- Grid de productos: se llena dinámicamente desde script.js -->
     <div id="grid-productos" class="grid-productos"></div>
+  </section>
+
+  <!-- ================= BENEFICIOS ================= -->
+  <section class="beneficios">
+    <div class="contenedor beneficios__grid">
+      <div class="beneficio">
+        <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z"/><circle cx="7" cy="17" r="1.8"/><circle cx="17" cy="17" r="1.8"/></svg>
+        <div><strong>Envío gratis</strong><span>En todos tus pedidos</span></div>
+      </div>
+      <div class="beneficio">
+        <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg>
+        <div><strong>Atención directa</strong><span>Confirmamos tu pedido por WhatsApp</span></div>
+      </div>
+      <div class="beneficio">
+        <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M3 17L17 3l4 4L7 21z"/></svg>
+        <div><strong>Tallas del 36 al 45</strong><span>Elige tu talla habitual</span></div>
+      </div>
+    </div>
   </section>
 
   <!-- ================= MODAL DE DETALLE ================= -->
@@ -122,6 +144,7 @@
             <textarea name="nota" maxlength="500" rows="2" placeholder="Referencia, hora de entrega, etc."></textarea>
           </label>
           <button id="btn-enviar-pedido" type="submit" class="pedido__enviar">Confirmar pedido</button>
+          <button id="pedido-volver" type="button" class="pedido__secundario">Seguir comprando</button>
         </form>
       </div>
 
@@ -161,15 +184,29 @@
   <div id="toast-contenedor" class="toast-contenedor" aria-live="polite"></div>
 
   <!-- ================= FOOTER ================= -->
-  <footer class="footer">
-    <div class="footer__marca">
-      <svg viewBox="0 0 48 48" width="20" height="20" aria-hidden="true">
-        <rect x="6" y="26" width="26" height="8" rx="4" transform="rotate(-28 6 26)" fill="currentColor"/>
-        <rect x="18" y="10" width="20" height="8" rx="4" transform="rotate(-28 18 10)" fill="currentColor" opacity="0.5"/>
-      </svg>
-      <span>GoldenStep</span>
+  <footer id="contacto" class="footer">
+    <div class="footer__grid">
+      <div class="footer__col">
+        <p class="footer__marca">GoldenStep</p>
+        <p>Calzado deportivo y casual. Pide por la web y te atendemos por WhatsApp.</p>
+        <div id="redes" class="redes"></div>
+      </div>
+      <div class="footer__col">
+        <h4>Soporte</h4>
+        <a class="enlace-wa" data-mensaje="Hola, tengo una pregunta, ¿me podrían ayudar, por favor?" href="#" target="_blank" rel="noopener">Preguntas frecuentes</a>
+        <a class="enlace-wa" data-mensaje="Hola, quiero consultar sobre los envíos, por favor." href="#" target="_blank" rel="noopener">Envíos</a>
+        <a class="enlace-wa" data-mensaje="Hola, quiero consultar sobre cambios, por favor." href="#" target="_blank" rel="noopener">Cambios</a>
+      </div>
+      <div class="footer__col footer__col--news">
+        <h4>Recibe novedades</h4>
+        <p>Suscríbete y entérate primero de los nuevos modelos.</p>
+        <form id="form-newsletter" class="newsletter">
+          <input name="correo" type="email" required maxlength="120" placeholder="Tu correo electrónico" aria-label="Correo electrónico">
+          <button type="submit">Suscribirme</button>
+        </form>
+      </div>
     </div>
-    <p>© 2026 GoldenStep.</p>
+    <p class="footer__copy">© 2026 GoldenStep.</p>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.2/dist/umd/supabase.js"></script>
