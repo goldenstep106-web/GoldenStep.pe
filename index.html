@@ -3,33 +3,50 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GoldenStep</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect x='6' y='26' width='26' height='8' rx='4' transform='rotate(-28 6 26)' fill='%233F5BFF'/%3E%3Crect x='18' y='10' width='20' height='8' rx='4' transform='rotate(-28 18 10)' fill='%2311201F'/%3E%3C/svg%3E">
+<title>GoldenStep | Zapatillas deportivas y casuales con envío gratis</title>
+<meta name="description" content="Descubre zapatillas deportivas y casuales en GoldenStep. Elige tu talla, pide fácil por WhatsApp y recibe tu pedido con envío gratis.">
+<meta name="theme-color" content="#0b0f0e">
+<link rel="canonical" href="https://goldenstep106-web.github.io/GoldenStep.pe/">
+
+<!-- Open Graph (vista previa al compartir el enlace) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="GoldenStep">
+<meta property="og:locale" content="es_PE">
+<meta property="og:title" content="GoldenStep | Zapatillas deportivas y casuales">
+<meta property="og:description" content="Descubre zapatillas deportivas y casuales diseñadas para acompañarte en cada paso. Pide fácil por WhatsApp.">
+<meta property="og:url" content="https://goldenstep106-web.github.io/GoldenStep.pe/">
+<meta property="og:image" content="https://goldenstep106-web.github.io/GoldenStep.pe/imaganes/portada.jpg">
+<meta property="og:image:alt" content="Zapatillas deportivas blancas con detalles negros sobre fondo oscuro con luz dorada">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect x='6' y='26' width='26' height='8' rx='4' transform='rotate(-28 6 26)' fill='%23F2A93B'/%3E%3Crect x='18' y='10' width='20' height='8' rx='4' transform='rotate(-28 18 10)' fill='%2311201F'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Manrope:wght@400;500;600;700&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <a class="saltar" href="#contenido">Saltar al contenido</a>
 
-  <!-- Loader inicial: se oculta con el evento "load" (INDICADOR 8) -->
-  <div id="loader" class="loader">
+  <!-- Pantalla de carga: se oculta con el evento "load" -->
+  <div id="loader" class="loader" aria-hidden="true">
     <span class="loader__marca">
       <svg viewBox="0 0 48 48" width="34" height="34" aria-hidden="true">
         <rect x="6" y="26" width="26" height="8" rx="4" transform="rotate(-28 6 26)" fill="currentColor"/>
         <rect x="18" y="10" width="20" height="8" rx="4" transform="rotate(-28 18 10)" fill="currentColor" opacity="0.5"/>
       </svg>
-     GoldenStep
+      GoldenStep
     </span>
   </div>
 
-  <!-- ================= HEADER ================= -->
+  <!-- ================= ENCABEZADO ================= -->
   <header id="header" class="header">
     <div class="header__inner">
-      <button id="btn-menu" class="icono-btn menu-btn" aria-label="Abrir menú" aria-expanded="false">
-        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+      <button id="btn-menu" class="icono-btn menu-btn" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
+        <span class="menu-btn__barra"></span><span class="menu-btn__barra"></span><span class="menu-btn__barra"></span>
       </button>
-      <a href="#inicio" class="marca">
-        <img class="marca__icono" src="imaganes/logo.png" alt="Logo GoldenStep">
+      <a href="#inicio" class="marca" aria-label="GoldenStep, ir al inicio">
+        <img class="marca__icono" src="imaganes/logo.png" alt="" width="120" height="42">
         <span class="marca__texto">GoldenStep</span>
       </a>
       <nav id="nav" class="nav" aria-label="Principal">
@@ -40,18 +57,19 @@
         <a class="nav__link" href="#contacto">Contacto</a>
       </nav>
       <div class="header__acciones">
-        <button id="btn-lupa" class="icono-btn" aria-label="Buscar">
+        <button id="btn-lupa" class="icono-btn" type="button" aria-label="Buscar productos" aria-expanded="false" aria-controls="buscador-panel">
           <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line></svg>
         </button>
-        <a id="enlace-whatsapp" class="icono-btn enlace-wa" data-mensaje="Hola, quiero hacer una consulta, por favor." href="#" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp"></a>
-        <button id="btn-carrito" class="btn-carrito" aria-label="Abrir carrito">
+        <a id="enlace-whatsapp" class="icono-btn icono-btn--wa enlace-wa" data-mensaje="Hola, quiero hacer una consulta, por favor." href="#" target="_blank" rel="noopener noreferrer" aria-label="Escribir por WhatsApp"></a>
+        <button id="btn-carrito" class="btn-carrito" type="button" aria-label="Abrir carrito" aria-haspopup="dialog">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7h12l-1 12H7L6 7Z"></path><path d="M9 7a3 3 0 0 1 6 0"></path></svg>
           <span id="contador-carrito" class="contador-carrito">0</span>
         </button>
       </div>
     </div>
     <div id="buscador-panel" class="buscador-panel" hidden>
-      <div class="buscador-caja">
+      <div class="buscador-caja" role="search">
+        <label class="sr-only" for="buscador">Buscar calzado por nombre o categoría</label>
         <input id="buscador" class="buscador" type="text" placeholder="Buscar calzado..." autocomplete="off">
         <button id="btn-buscar" class="buscador-btn" type="button" aria-label="Buscar">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line></svg>
@@ -60,76 +78,186 @@
     </div>
   </header>
 
-  <!-- ================= HERO ================= -->
-  <section id="inicio" class="hero">
-    <div class="hero__fondo"><img src="imaganes/portada.jpg" alt="Zapatillas GoldenStep"></div>
-    <div class="hero__contenido">
-      <p class="hero__ticker"><span class="hero__punto"></span><span id="hero-mensaje">Colección nueva cada temporada</span></p>
-      <h1 class="hero__titulo">Camina con estilo,<br>pisa con fuerza.</h1>
-      <p class="hero__subtitulo">Zapatillas deportivas y casuales para moverte rápido y verte mejor en cada paso. Pide fácil por WhatsApp, con envío gratis.</p>
-      <a href="#catalogo" class="btn btn--primario">Explorar colección</a>
-    </div>
-  </section>
+  <main id="contenido">
 
-  <!-- ================= CATEGORÍAS ================= -->
-  <section class="categorias" id="categorias">
-    <div class="contenedor">
-      <h2 class="seccion__titulo">Compra por categoría</h2>
-      <div class="categorias__grid">
-        <a href="#catalogo" class="categoria" data-categoria="deportivo"><img src="imaganes/3.jpeg" alt="" loading="lazy"><span class="categoria__texto">Zapatillas deportivas</span></a>
-        <a href="#catalogo" class="categoria" data-categoria="casual"><img src="imaganes/4.jpeg" alt="" loading="lazy"><span class="categoria__texto">Calzado casual</span></a>
-        <a href="#catalogo" class="categoria" data-categoria="ultimas"><img src="imaganes/5.jpeg" alt="" loading="lazy"><span class="categoria__texto">Últimas unidades</span></a>
+    <!-- ================= HERO ================= -->
+    <section id="inicio" class="hero" aria-labelledby="hero-titulo">
+      <div class="hero__fondo">
+        <img src="imaganes/portada.jpg" alt="Zapatillas deportivas blancas con detalles negros sobre fondo oscuro con luz dorada" width="980" height="552" fetchpriority="high" decoding="async">
+      </div>
+      <div class="hero__contenido">
+        <p class="hero__etiqueta">Nueva colección</p>
+        <h1 id="hero-titulo" class="hero__titulo">Camina con estilo.<br>Pisa con fuerza.</h1>
+        <p class="hero__subtitulo">Descubre zapatillas deportivas y casuales diseñadas para acompañarte en cada paso.</p>
+        <div class="hero__acciones">
+          <a href="#catalogo" class="btn btn--primario">Explorar colección</a>
+          <a href="#catalogo" class="btn btn--borde" data-categoria="deportivo">Ver zapatillas</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CATEGORÍAS ================= -->
+    <section id="categorias" class="seccion revelar" aria-labelledby="titulo-categorias">
+      <div class="contenedor">
+        <header class="seccion__cabecera">
+          <h2 id="titulo-categorias" class="seccion__titulo">Encuentra tu estilo</h2>
+          <p class="seccion__subtitulo">Descubre la colección que mejor se adapta a ti.</p>
+        </header>
+        <div class="categorias__grid">
+          <a href="#catalogo" class="categoria" data-categoria="deportivo">
+            <img src="imaganes/3.jpeg" alt="Zapatilla azul claro con franjas blancas sostenida en la mano" loading="lazy" decoding="async">
+            <div class="categoria__info">
+              <h3 class="categoria__titulo">Zapatillas deportivas</h3>
+              <p>Comodidad para moverte a tu ritmo.</p>
+              <span class="categoria__enlace">Ver colección →</span>
+            </div>
+          </a>
+          <a href="#catalogo" class="categoria" data-categoria="casual">
+            <img src="imaganes/4.jpeg" alt="Zapatilla roja con franjas blancas sostenida en la mano" loading="lazy" decoding="async">
+            <div class="categoria__info">
+              <h3 class="categoria__titulo">Calzado casual</h3>
+              <p>Estilo para tu día a día.</p>
+              <span class="categoria__enlace">Ver colección →</span>
+            </div>
+          </a>
+          <a href="#catalogo" class="categoria" data-categoria="ultimas">
+            <img src="imaganes/5.jpeg" alt="Zapatilla blanca con detalles negros sostenida en la mano" loading="lazy" decoding="async">
+            <div class="categoria__info">
+              <h3 class="categoria__titulo">Últimas unidades</h3>
+              <p>Modelos con pocas unidades disponibles.</p>
+              <span class="categoria__enlace">Ver colección →</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PRODUCTOS ================= -->
+    <section id="catalogo" class="seccion seccion--gris" aria-labelledby="titulo-catalogo">
+      <div class="contenedor">
+        <header class="seccion__cabecera seccion__cabecera--fila">
+          <div>
+            <h2 id="titulo-catalogo" class="seccion__titulo">Los favoritos de GoldenStep</h2>
+            <p class="seccion__subtitulo">Modelos seleccionados para destacar en cada paso.</p>
+          </div>
+          <p id="resultado-info" class="resultado-info" aria-live="polite"></p>
+        </header>
+        <!-- Se llena desde script.js -->
+        <div id="grid-productos" class="grid-productos"></div>
+      </div>
+    </section>
+
+    <!-- ================= BANNER ================= -->
+    <section class="banner revelar" aria-labelledby="titulo-banner">
+      <div class="contenedor banner__interior">
+        <h2 id="titulo-banner" class="banner__titulo">Tu próximo par empieza aquí.</h2>
+        <a href="#catalogo" class="btn btn--primario">Ver colección</a>
+      </div>
+    </section>
+
+    <!-- ================= BENEFICIOS ================= -->
+    <section class="seccion revelar" aria-labelledby="titulo-beneficios">
+      <div class="contenedor">
+        <header class="seccion__cabecera">
+          <h2 id="titulo-beneficios" class="seccion__titulo">Compra con confianza</h2>
+        </header>
+        <ul class="beneficios__grid">
+          <li class="beneficio">
+            <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.500-3 7.500-7 9-4-1.500-7-4.500-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
+            <h3>Envíos seguros</h3>
+            <p>Envío gratis en todos tus pedidos.</p>
+          </li>
+          <li class="beneficio">
+            <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8.500 9.500h7M8.500 12.500h4"/></svg>
+            <h3>Compra fácil por WhatsApp</h3>
+            <p>Confirma tu pedido directamente por el chat.</p>
+          </li>
+          <li class="beneficio">
+            <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.500"/><path d="M5 20c0-4 3-6 7-6s7 2 7 6"/></svg>
+            <h3>Atención personalizada</h3>
+            <p>Te orientamos para elegir tu talla.</p>
+          </li>
+          <li class="beneficio">
+            <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.700 5.600 6.100.9-4.400 4.300 1 6.100L12 17l-5.400 2.900 1-6.100L3.200 9.500l6.100-.9z"/></svg>
+            <h3>Calidad y estilo</h3>
+            <p>Modelos seleccionados para ti.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================= SOBRE GOLDENSTEP ================= -->
+    <section id="nosotros" class="sobre revelar" aria-labelledby="titulo-sobre">
+      <div class="contenedor sobre__grid">
+        <div class="sobre__imagen">
+          <img src="imaganes/12.jpeg" alt="Calzado de la colección GoldenStep sostenido en la mano" loading="lazy" decoding="async">
+        </div>
+        <div class="sobre__texto">
+          <p class="seccion__etiqueta">Sobre GoldenStep</p>
+          <h2 id="titulo-sobre" class="seccion__titulo">Más que unas zapatillas.</h2>
+          <p>En GoldenStep creemos que cada paso representa una oportunidad para avanzar. Seleccionamos modelos que combinan estilo, comodidad y personalidad para acompañarte en cada momento.</p>
+          <p>Atendemos cada pedido de forma directa por WhatsApp.</p>
+          <a href="#contacto" class="btn btn--primario">Conoce GoldenStep</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= PIE DE PÁGINA ================= -->
+  <footer id="contacto" class="footer">
+    <div class="footer__grid">
+      <div class="footer__col">
+        <p class="footer__marca">GoldenStep</p>
+        <p>Zapatillas deportivas y casuales. Elige tu talla, haz tu pedido en la web y te atendemos por WhatsApp.</p>
+      </div>
+      <nav class="footer__col" aria-label="Navegación del pie de página">
+        <p class="footer__titulo">Navegación</p>
+        <ul>
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#catalogo" data-categoria="todos">Catálogo</a></li>
+          <li><a href="#catalogo" data-categoria="deportivo">Zapatillas</a></li>
+          <li><a href="#catalogo" data-categoria="casual">Casuales</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+      <div class="footer__col">
+        <p class="footer__titulo">Atención</p>
+        <ul id="lista-atencion"></ul>
+      </div>
+      <div class="footer__col footer__col--news">
+        <p class="footer__titulo">Recibe novedades</p>
+        <p>Suscríbete y entérate primero de los nuevos modelos.</p>
+        <form id="form-newsletter" class="newsletter">
+          <label class="sr-only" for="correo-newsletter">Correo electrónico</label>
+          <input id="correo-newsletter" name="correo" type="email" required maxlength="120" placeholder="Tu correo electrónico" autocomplete="email">
+          <button type="submit">Suscribirme</button>
+        </form>
       </div>
     </div>
-  </section>
+    <p class="footer__copy">© 2026 GoldenStep. Todos los derechos reservados.</p>
+  </footer>
 
-  <!-- ================= CATÁLOGO ================= -->
-  <section id="catalogo" class="catalogo">
-    <div class="catalogo__cabecera">
-      <h2>Catálogo</h2>
-      <p id="resultado-info" class="resultado-info"></p>
-    </div>
-
-    <!-- Grid de productos: se llena dinámicamente desde script.js -->
-    <div id="grid-productos" class="grid-productos"></div>
-  </section>
-
-  <!-- ================= BENEFICIOS ================= -->
-  <section class="beneficios">
-    <div class="contenedor beneficios__grid">
-      <div class="beneficio">
-        <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z"/><circle cx="7" cy="17" r="1.8"/><circle cx="17" cy="17" r="1.8"/></svg>
-        <div><strong>Envío gratis</strong><span>En todos tus pedidos</span></div>
-      </div>
-      <div class="beneficio">
-        <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg>
-        <div><strong>Atención directa</strong><span>Confirmamos tu pedido por WhatsApp</span></div>
-      </div>
-      <div class="beneficio">
-        <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M3 17L17 3l4 4L7 21z"/></svg>
-        <div><strong>Tallas del 36 al 45</strong><span>Elige tu talla habitual</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= MODAL DE DETALLE ================= -->
+  <!-- ================= FICHA DEL PRODUCTO ================= -->
   <div id="modal" class="modal" hidden>
-    <div class="modal__contenido">
-      <button id="cerrar-modal" class="modal__cerrar" aria-label="Cerrar">✕</button>
+    <div class="modal__contenido" role="dialog" aria-modal="true" aria-labelledby="ficha-titulo">
+      <button id="cerrar-modal" class="modal__cerrar" type="button" aria-label="Cerrar detalle del producto">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+      </button>
       <div id="modal-cuerpo"></div>
     </div>
   </div>
 
-  <!-- ================= MODAL DE PEDIDO ================= -->
+  <!-- ================= FORMULARIO DE PEDIDO ================= -->
   <div id="modal-pedido" class="modal" hidden>
-    <div class="modal__contenido modal__contenido--pedido">
-      <button id="cerrar-pedido" class="modal__cerrar" aria-label="Cerrar">✕</button>
+    <div id="dialogo-pedido" class="modal__contenido modal__contenido--pedido" role="dialog" aria-modal="true" aria-labelledby="pedido-titulo">
+      <button id="cerrar-pedido" class="modal__cerrar" type="button" aria-label="Cerrar formulario de pedido">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+      </button>
 
-      <!-- Formulario -->
       <div id="pedido-formulario">
-        <h2 class="pedido__titulo">Finalizar pedido</h2>
+        <h2 id="pedido-titulo" class="pedido__titulo">Finalizar pedido</h2>
         <div id="pedido-resumen" class="pedido__resumen"></div>
-
         <form id="form-pedido" class="pedido__form">
           <label class="pedido__campo">Nombre completo
             <input name="nombre" type="text" required minlength="2" maxlength="100" autocomplete="name" placeholder="Ej: Juan Pérez">
@@ -148,23 +276,24 @@
         </form>
       </div>
 
-      <!-- Confirmación -->
       <div id="pedido-exito" class="pedido__exito" hidden>
-        <h2 class="pedido__titulo">¡Pedido recibido!</h2>
+        <h2 id="pedido-exito-titulo" class="pedido__titulo">¡Pedido recibido!</h2>
         <p>Tu número de pedido es</p>
         <p id="pedido-codigo" class="pedido__codigo"></p>
         <p class="pedido__texto">Guárdalo por si necesitas consultarlo. Te contactaremos para confirmar tu pedido y la entrega.</p>
-        <a id="pedido-whatsapp" class="pedido__enviar pedido__enviar--enlace" href="#" target="_blank" rel="noopener">Confirmar por WhatsApp</a>
+        <a id="pedido-whatsapp" class="pedido__enviar pedido__enviar--enlace" href="#" target="_blank" rel="noopener noreferrer">Confirmar por WhatsApp</a>
         <button id="pedido-seguir" class="pedido__secundario" type="button">Seguir comprando</button>
       </div>
     </div>
   </div>
 
   <!-- ================= CARRITO (panel lateral) ================= -->
-  <aside id="panel-carrito" class="panel-carrito">
+  <aside id="panel-carrito" class="panel-carrito" role="dialog" aria-modal="true" aria-label="Carrito de compras" aria-hidden="true">
     <div class="panel-carrito__cabecera">
       <h2>Tu carrito</h2>
-      <button id="cerrar-carrito" class="modal__cerrar" aria-label="Cerrar carrito">✕</button>
+      <button id="cerrar-carrito" class="modal__cerrar modal__cerrar--estatico" type="button" aria-label="Cerrar carrito">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+      </button>
     </div>
     <div id="items-carrito" class="items-carrito"></div>
     <div class="panel-carrito__resumen">
@@ -172,42 +301,21 @@
       <div class="linea"><span>Envío</span><span id="res-envio">Gratis</span></div>
       <div class="linea linea--total"><span>Total</span><span id="res-total">S/ 0.00</span></div>
     </div>
-    <button id="btn-finalizar" class="btn btn--bloque">Finalizar pedido</button>
-    <button id="btn-vaciar" class="btn btn--secundario">Vaciar carrito</button>
+    <button id="btn-finalizar" class="btn btn--bloque" type="button">Finalizar pedido</button>
+    <button id="btn-vaciar" class="btn btn--secundario" type="button">Vaciar carrito</button>
   </aside>
   <div id="overlay" class="overlay" hidden></div>
 
-  <!-- Botón volver arriba: aparece/desaparece con el evento scroll (INDICADOR 8) -->
-  <button id="btn-arriba" class="btn-arriba" hidden aria-label="Volver arriba">↑</button>
+  <!-- Botones flotantes: volver arriba (arriba) y WhatsApp (abajo) -->
+  <button id="btn-arriba" class="btn-arriba" type="button" hidden aria-label="Volver arriba">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
+  <a id="wa-flotante" class="wa-flotante enlace-wa" data-mensaje="Hola, necesito ayuda, por favor." href="#" target="_blank" rel="noopener noreferrer" aria-label="Escribir por WhatsApp. ¿Necesitas ayuda?">
+    <span class="wa-flotante__tip" aria-hidden="true">¿Necesitas ayuda?</span>
+  </a>
 
-  <!-- Zona de notificaciones tipo "toast" -->
+  <!-- Avisos tipo "toast" -->
   <div id="toast-contenedor" class="toast-contenedor" aria-live="polite"></div>
-
-  <!-- ================= FOOTER ================= -->
-  <footer id="contacto" class="footer">
-    <div class="footer__grid">
-      <div class="footer__col">
-        <p class="footer__marca">GoldenStep</p>
-        <p>Calzado deportivo y casual. Pide por la web y te atendemos por WhatsApp.</p>
-        <div id="redes" class="redes"></div>
-      </div>
-      <div class="footer__col">
-        <h4>Soporte</h4>
-        <a class="enlace-wa" data-mensaje="Hola, tengo una pregunta, ¿me podrían ayudar, por favor?" href="#" target="_blank" rel="noopener">Preguntas frecuentes</a>
-        <a class="enlace-wa" data-mensaje="Hola, quiero consultar sobre los envíos, por favor." href="#" target="_blank" rel="noopener">Envíos</a>
-        <a class="enlace-wa" data-mensaje="Hola, quiero consultar sobre cambios, por favor." href="#" target="_blank" rel="noopener">Cambios</a>
-      </div>
-      <div class="footer__col footer__col--news">
-        <h4>Recibe novedades</h4>
-        <p>Suscríbete y entérate primero de los nuevos modelos.</p>
-        <form id="form-newsletter" class="newsletter">
-          <input name="correo" type="email" required maxlength="120" placeholder="Tu correo electrónico" aria-label="Correo electrónico">
-          <button type="submit">Suscribirme</button>
-        </form>
-      </div>
-    </div>
-    <p class="footer__copy">© 2026 GoldenStep.</p>
-  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.2/dist/umd/supabase.js"></script>
   <script src="script.js"></script>
