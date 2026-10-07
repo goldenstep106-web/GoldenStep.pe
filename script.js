@@ -51,14 +51,14 @@ function esNumeroValido(valor) {
    - palabrasClave:  palabras que el buscador también revisa.
    ========================================================================= */
 const productos = [
-  { id: '1', nombre: 'Zapatilla deportiva GS-01', categoria: 'deportivo', precio: 120, precioAnterior: null, etiqueta: 'Nuevo', stock: 10, imagen: 'imaganes/3.jpeg',   descripcion: 'Zapatilla deportiva de estilo moderno, pensada para tu rutina y tu día a día.', palabrasClave: ['correr', 'running', 'gimnasio', 'entrenar'] },
-  { id: '2', nombre: 'Zapatilla casual GS-02',    categoria: 'casual',    precio: 120, precioAnterior: null, etiqueta: 'Nuevo', stock: 6,  imagen: 'imaganes/4.jpeg',   descripcion: 'Zapatilla casual de estilo urbano para combinar con tu look diario.', palabrasClave: ['oficina', 'elegante', 'dia a dia'] },
-  { id: '3', nombre: 'Zapatilla casual GS-03',    categoria: 'casual',    precio: 120, precioAnterior: null, etiqueta: 'Nuevo', stock: 4,  imagen: 'imaganes/5.jpeg',   descripcion: 'Zapatilla casual con diseño llamativo para destacar en cada paso.', palabrasClave: ['outdoor', 'paseo'] },
-  { id: '4', nombre: 'Zapatilla casual GS-04',    categoria: 'casual',    precio: 120, precioAnterior: null, etiqueta: 'Nuevo', stock: 9,  imagen: 'imaganes/6.jpeg',   descripcion: 'Zapatilla casual cómoda para la universidad, el paseo o el día a día.', palabrasClave: ['universidad', 'uso casual', 'paseo'] },
-  { id: '5', nombre: 'Zapatilla deportiva GS-05', categoria: 'deportivo', precio: 100, precioAnterior: null, etiqueta: 'Nuevo', stock: 10, imagen: 'imaganes/7.jpeg',   descripcion: 'Zapatilla deportiva de estilo moderno para entrenar o salir con estilo.', palabrasClave: ['futbol', 'correr', 'entrenar'] },
-  { id: '6', nombre: 'Zapatilla casual GS-06',    categoria: 'casual',    precio: 100, precioAnterior: null, etiqueta: 'Nuevo', stock: 3,  imagen: 'imaganes/9.jpeg',   descripcion: 'Zapatilla casual con diseño robusto para acompañarte en cualquier plan.', palabrasClave: ['frio', 'outdoor'] },
-  { id: '7', nombre: 'Zapatilla casual GS-07',    categoria: 'casual',    precio: 100, precioAnterior: null, etiqueta: 'Nuevo', stock: 7,  imagen: 'imaganes/12.jpeg',  descripcion: 'Zapatilla casual elegante para tus salidas y ocasiones especiales.', palabrasClave: ['formal', 'fiesta', 'elegante'] },
-  { id: '8', nombre: 'Zapatilla deportiva GS-08', categoria: 'deportivo', precio: 100, precioAnterior: null, etiqueta: 'Nuevo', stock: 8,  imagen: 'imaganes/444.jpeg', descripcion: 'Zapatilla deportiva versátil para el gimnasio, la calle o el fútbol.', palabrasClave: ['futbol', 'gimnasio', 'running'] },
+  { id: '1', nombre: 'Zapatilla Campus', categoria: 'casual', precio: 120, precioAnterior: null, etiqueta: 'Nuevo', stock: 10, imagen: 'imaganes/3.jpeg',   descripcion: 'Zapatilla casual de estilo moderno, pensada para tu rutina y tu día a día.', palabrasClave: ['correr', 'running', 'gimnasio', 'entrenar'] },
+  { id: '2', nombre: 'Zapatilla Campus',    categoria: 'casual',    precio: 90, precioAnterior: null, etiqueta: 'Nuevo', stock: 6,  imagen: 'imaganes/4.jpeg',   descripcion: 'Zapatilla casual de estilo urbano para combinar con tu look diario.', palabrasClave: ['oficina', 'elegante', 'dia a dia'] },
+  { id: '3', nombre: 'Zapatilla AirMax',    categoria: 'casual',    precio: 99, precioAnterior: null, etiqueta: 'Nuevo', stock: 4,  imagen: 'imaganes/5.jpeg',   descripcion: 'Zapatilla casual con diseño llamativo para destacar en cada paso.', palabrasClave: ['outdoor', 'paseo'] },
+  { id: '4', nombre: 'Zapatilla Campus',    categoria: 'casual',    precio: 110, precioAnterior: null, etiqueta: 'Nuevo', stock: 9,  imagen: 'imaganes/6.jpeg',   descripcion: 'Zapatilla casual cómoda para la universidad, el paseo o el día a día.', palabrasClave: ['universidad', 'uso casual', 'paseo'] },
+  { id: '5', nombre: 'Zapatilla Campus', categoria: 'casual', precio: 120, precioAnterior: null, etiqueta: 'Nuevo', stock: 10, imagen: 'imaganes/7.jpeg',   descripcion: 'Zapatilla casual de estilo moderno para entrenar o salir con estilo.', palabrasClave: ['futbol', 'correr', 'entrenar'] },
+  { id: '6', nombre: 'Zapatilla AirMax',    categoria: 'casual',    precio: 150, precioAnterior: null, etiqueta: 'Nuevo', stock: 3,  imagen: 'imaganes/9.jpeg',   descripcion: 'Zapatilla casual con diseño robusto para acompañarte en cualquier plan.', palabrasClave: ['frio', 'outdoor'] },
+  { id: '7', nombre: 'Zapatilla Campus',    categoria: 'casual',    precio: 99, precioAnterior: null, etiqueta: 'Nuevo', stock: 7,  imagen: 'imaganes/12.jpeg',  descripcion: 'Zapatilla casual elegante para tus salidas y ocasiones especiales.', palabrasClave: ['formal', 'fiesta', 'elegante'] },
+  { id: '8', nombre: 'Zapatilla Campus', categoria: 'casual', precio: 80, precioAnterior: null, etiqueta: 'Nuevo', stock: 8,  imagen: 'imaganes/444.jpeg', descripcion: 'Zapatilla casual versátil para el gimnasio, la calle.', palabrasClave: ['futbol', 'gimnasio', 'running'] },
 ];
 
 const NOMBRES_CATEGORIA = { deportivo: 'Zapatillas deportivas', casual: 'Calzado casual', bota: 'Botas' };
@@ -117,12 +117,19 @@ class Zapato {
     return '';
   }
 
-  // Enlace de WhatsApp con el mensaje de consulta de precio.
-  enlaceConsulta() {
-    let mensaje = `Hola, quiero consultar el precio de este calzado: ${this.nombre}. ¿Me podría brindar más información, por favor?`;
+  // Enlace de WhatsApp: al vendedor le llega nombre, talla, precio y un mensaje automático.
+  enlaceConsulta(talla = '') {
+    const lineas = [
+      `Hola, quiero consultar sobre este calzado de ${NOMBRE_TIENDA}:`,
+      '',
+      `Producto: ${this.nombre}`,
+    ];
+    if (talla) lineas.push(`Talla: ${talla}`);
+    lineas.push(`Precio: ${this.precioFormateado}`);
     const foto = this.urlFoto();
-    if (foto) mensaje += `\n${foto}`;
-    return `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(mensaje)}`;
+    if (foto) lineas.push(`Foto: ${foto}`);
+    lineas.push('', '¿Está disponible? ¿Me podría brindar más información, por favor?');
+    return `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(lineas.join('\n'))}`;
   }
 
   // Método "genérico": las subclases lo sobrescriben (polimorfismo)
@@ -706,7 +713,7 @@ function abrirModal(id, pedirTalla = false) {
         <p class="detalle__aviso">Elige tu talla habitual. ¿Dudas? <a href="${consultaTalla}" target="_blank" rel="noopener noreferrer">Escríbenos por WhatsApp</a>.</p>
 
         <div class="detalle__acciones">
-          <button type="button" class="detalle__principal" data-accion="pedir" ${z.hayStock() ? '' : 'disabled'}>${z.hayStock() ? 'Pedir ahora' : 'Producto agotado'}</button>
+          <button type="button" class="detalle__principal" data-accion="consultar-ficha" ${z.hayStock() ? '' : 'disabled'}>${z.hayStock() ? 'Consultar por WhatsApp' : 'Producto agotado'}</button>
           <button type="button" class="detalle__secundario" data-accion="agregar-ficha" ${z.hayStock() ? '' : 'disabled'}>${ICONO_BOLSA} Agregar al carrito</button>
           <button type="button" class="detalle__fav ${esFav ? 'detalle__fav--activo' : ''}" data-accion="favorito-modal" aria-label="Guardar en favoritos" aria-pressed="${esFav}">
             ${ICONO_CORAZON}
@@ -729,7 +736,7 @@ modal.addEventListener('click', (evento) => {          // clic fuera de la ficha
   if (evento.target === modal) cerrarModalEl(modal);
 });
 
-// Comprueba que haya una talla elegida antes de agregar o pedir
+// Comprueba que haya una talla elegida antes de agregar o consultar
 function validarTalla() {
   if (tallaSeleccionada) return true;
   const grupo = document.getElementById('ficha-tallas');
@@ -767,20 +774,15 @@ document.getElementById('modal-cuerpo').addEventListener('click', (evento) => {
     return;
   }
 
-  // Pedir ahora: agrega el producto y abre directo el formulario del pedido
-  if (evento.target.closest('[data-accion="pedir"]')) {
+  // Consultar: abre WhatsApp con nombre, talla y precio del producto
+  if (evento.target.closest('[data-accion="consultar-ficha"]')) {
     if (!validarTalla()) return;
-    if (carrito.agregar(zapatoModal, 1, tallaSeleccionada)) {
-      contadorClicsAgregar(); // función "creciente": suma un clic más
-      renderCarrito();
-      renderCatalogo();
-      cerrarModalEl(modal);
-      abrirPedido();
-    }
+    window.open(zapatoModal.enlaceConsulta(tallaSeleccionada), '_blank', 'noopener');
+    cerrarModalEl(modal);
     return;
   }
 
-  // Agregar al carrito: suma el producto y deja seguir comprando
+  // Agregar al carrito: suma el producto y deja seguir viendo el catálogo
   if (evento.target.closest('[data-accion="agregar-ficha"]')) {
     if (!validarTalla()) return;
     if (carrito.agregar(zapatoModal, 1, tallaSeleccionada)) {
@@ -794,10 +796,12 @@ document.getElementById('modal-cuerpo').addEventListener('click', (evento) => {
 });
 
 /* =========================================================================
-   PEDIDOS: formulario + base de datos (Supabase)
+   CONSULTA POR WHATSAPP (carrito) + base de datos (Supabase, solo boletín)
    -------------------------------------------------------------------------
+   Ya no hay formulario de pedido: el botón del carrito abre WhatsApp con
+   el nombre, la talla y el precio de cada producto y un mensaje automático.
    La clave "publishable" es PÚBLICA a propósito: la seguridad real la dan las
-   reglas (RLS) de la base de datos, que solo permiten CREAR pedidos.
+   reglas (RLS) de la base de datos.
    NUNCA pegues aquí la clave "secret" ni "service_role".
    ========================================================================= */
 const SUPABASE_URL = 'https://awqsounbjbalagyzrggj.supabase.co';
@@ -806,143 +810,37 @@ const db = (window.supabase && window.supabase.createClient)
   ? window.supabase.createClient(SUPABASE_URL, SUPABASE_CLAVE)
   : null;
 
-const modalPedido      = document.getElementById('modal-pedido');
-const dialogoPedido    = document.getElementById('dialogo-pedido');
-const formPedido       = document.getElementById('form-pedido');
-const resumenPedidoEl  = document.getElementById('pedido-resumen');
-const pedidoFormulario = document.getElementById('pedido-formulario');
-const pedidoExito      = document.getElementById('pedido-exito');
-const btnEnviarPedido  = document.getElementById('btn-enviar-pedido');
-
-// UUID para identificar el pedido (con respaldo si el navegador no tiene randomUUID)
-function generarId() {
-  if (window.crypto && typeof window.crypto.randomUUID === 'function') return window.crypto.randomUUID();
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
-    const r = Math.random() * 16 | 0;
-    return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-  });
-}
-
-function abrirPedido() {
-  if (carrito.estaVacio()) {
-    mostrarToast('Tu carrito está vacío', 'error');
-    return;
-  }
-  alternarCarrito(false);
-
-  const filas = carrito.listar();
-  resumenPedidoEl.innerHTML = filas.map(({ zapato, cantidad, talla }) => `
-    <div class="pedido__fila">
-      <span>${cantidad} × ${zapato.nombre}${talla ? ` · talla ${talla}` : ''}</span>
-      <span>${formatearMoneda(zapato.precio * cantidad)}</span>
-    </div>
-  `).join('') + `
-    <div class="pedido__fila"><span>Envío</span><span>Gratis</span></div>
-    <div class="pedido__fila pedido__fila--total"><span>Total</span><span>${formatearMoneda(carrito.subtotal())}</span></div>
-  `;
-
-  pedidoFormulario.hidden = false;
-  pedidoExito.hidden = true;
-  dialogoPedido.setAttribute('aria-labelledby', 'pedido-titulo');
-  abrirModalEl(modalPedido, document.getElementById('cerrar-pedido'));
-}
-
-function mostrarPedidoExitoso(id, filas, datos, total) {
-  const codigo = id.slice(0, 8).toUpperCase();
-  const lineas = filas.map(f => {
-    const foto = f.zapato.urlFoto();
-    return `- ${f.cantidad} x ${f.zapato.nombre} (talla ${f.talla}) - ${formatearMoneda(f.zapato.precio * f.cantidad)}` + (foto ? `\n  ${foto}` : '');
-  }).join('\n');
-  const mensaje =
-`Hola, quiero consultar el precio y que me brinden más información, por favor.
-Pedido N° ${codigo}
-
-Nombre: ${datos.nombre}
-Teléfono: ${datos.telefono}
-Dirección: ${datos.direccion}
-
-Productos:
-${lineas}
-
-Total: ${formatearMoneda(total)}`;
-
-  document.getElementById('pedido-codigo').textContent = codigo;
-  document.getElementById('pedido-whatsapp').href = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(mensaje)}`;
-  pedidoFormulario.hidden = true;
-  pedidoExito.hidden = false;
-  dialogoPedido.setAttribute('aria-labelledby', 'pedido-exito-titulo');
-  document.getElementById('pedido-whatsapp').focus();
-}
-
-document.getElementById('btn-finalizar').addEventListener('click', abrirPedido);
-document.getElementById('cerrar-pedido').addEventListener('click', () => cerrarModalEl(modalPedido));
-document.getElementById('pedido-seguir').addEventListener('click', () => cerrarModalEl(modalPedido));
-document.getElementById('pedido-volver').addEventListener('click', () => cerrarModalEl(modalPedido));
-modalPedido.addEventListener('click', (evento) => {
-  if (evento.target === modalPedido) cerrarModalEl(modalPedido);
-});
-
-formPedido.addEventListener('submit', async (evento) => {
-  evento.preventDefault();
-
-  if (!db) {
-    mostrarToast('No se pudo conectar con la base de datos', 'error');
-    return;
-  }
+function consultarCarrito() {
   const filas = carrito.listar();
   if (filas.length === 0) {
     mostrarToast('Tu carrito está vacío', 'error');
     return;
   }
 
-  const form = new FormData(formPedido);
-  const datos = {
-    nombre:    String(form.get('nombre')).trim(),
-    telefono:  String(form.get('telefono')).trim(),
-    direccion: String(form.get('direccion')).trim(),
-    nota:      String(form.get('nota')).trim(),
-  };
-  const id = generarId();
-  const total = Number(carrito.subtotal().toFixed(2));
+  const lista = filas.map(({ zapato, cantidad, talla }) => {
+    let linea = `- ${zapato.nombre}`;
+    if (talla) linea += ` | Talla: ${talla}`;
+    linea += ` | Precio: ${zapato.precioFormateado}`;
+    if (cantidad > 1) linea += ` | Cantidad: ${cantidad}`;
+    const foto = zapato.urlFoto();
+    if (foto) linea += `\n  ${foto}`;
+    return linea;
+  }).join('\n');
 
-  btnEnviarPedido.disabled = true;
-  btnEnviarPedido.textContent = 'Enviando...';
+  const mensaje =
+`Hola, quiero consultar sobre ${filas.length === 1 ? 'este producto' : 'estos productos'} de ${NOMBRE_TIENDA}:
 
-  try {
-    const { error } = await db.from('pedidos').insert({
-      id,
-      nombre: datos.nombre,
-      telefono: datos.telefono,
-      direccion: datos.direccion,
-      nota: datos.nota || null,
-      total,
-    });
-    if (error) throw error;
+${lista}
 
-    const { error: errorItems } = await db.from('pedido_items').insert(
-      filas.map(f => ({
-        pedido_id: id,
-        producto_id: f.zapato.id,
-        nombre: f.zapato.nombre,
-        talla: f.talla || 'sin talla',
-        cantidad: f.cantidad,
-        precio: f.zapato.precio,
-      }))
-    );
-    if (errorItems) throw errorItems;
+¿Están disponibles? ¿Me podrían brindar más información, por favor?`;
 
-    mostrarPedidoExitoso(id, filas, datos, total);
-    carrito.vaciar();
-    renderCarrito();
-    formPedido.reset();
-  } catch (err) {
-    console.error('Error al guardar el pedido:', err);
-    mostrarToast('No se pudo enviar el pedido. Inténtalo de nuevo.', 'error');
-  } finally {
-    btnEnviarPedido.disabled = false;
-    btnEnviarPedido.textContent = 'Confirmar pedido';
-  }
-});
+  alternarCarrito(false);
+  window.open(`https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(mensaje)}`, '_blank', 'noopener');
+}
+
+const btnFinalizar = document.getElementById('btn-finalizar');
+btnFinalizar.textContent = 'Consultar por WhatsApp';
+btnFinalizar.addEventListener('click', consultarCarrito);
 
 /* =========================================================================
    TECLADO: Escape cierra lo que esté abierto y el foco se queda dentro
@@ -951,7 +849,6 @@ function cerrarDialogoSuperior() {
   const ultimo = dialogosAbiertos[dialogosAbiertos.length - 1];
   if (!ultimo) return false;
   if (ultimo === modal) cerrarModalEl(modal);
-  else if (ultimo === modalPedido) cerrarModalEl(modalPedido);
   else if (ultimo === panelCarrito) alternarCarrito(false);
   return true;
 }
